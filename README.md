@@ -162,3 +162,19 @@ say minecraft:donkey
 
 # and so on...
 ```
+
+mc8 also has the minimum and maximum numbers that Minecaft can handle:
+
+*input*
+
+```javascipt
+console.log(util.number.min);
+console.log(util.number.max);
+```
+
+*output*
+
+```bash
+-2147483647
+2147483647
+```
