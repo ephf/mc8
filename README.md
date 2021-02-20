@@ -15,18 +15,28 @@ It has commands as well. it uses minecraft commands that can be put into your da
 
 # How do I Intall it?
 
-first download [node.js](https://nodejs.org/en/download/)
+First, download [node.js](https://nodejs.org/en/download/)
 
-then in your file, open command promt and 'cd' into your file, then type:
+Then in your file, open command promt and 'cd' into your file, then type:
 
 ```markdown
 $ npm install mc8 --save
 ```
 
-*without the dollar sign*
+(*without the dollar sign*)
 
-now that you have it installed, to begin, type this in your javascipt file:
+Now that you have it installed, to begin, type this in your javascipt file:
 
 ```javascript
 const mc8 = require("mc8");
 ```
+
+Then type:
+
+```javascript
+mc8.init();
+```
+
+What this does is initialize mc8, and creates public variables for each of the custom functions so that you don't have to type 'mc8.' before each of the function (you can still do that though)
+
+# How do I Use it?
