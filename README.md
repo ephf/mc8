@@ -167,7 +167,7 @@ mc8 also has the minimum and maximum numbers that Minecaft can handle:
 
 *input*
 
-```javascipt
+```javascript
 console.log(util.number.min);
 console.log(util.number.max);
 ```
