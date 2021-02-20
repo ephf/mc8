@@ -204,4 +204,36 @@ scoreboard.[objective name].operation('player name').[add | subtract | multiply 
 ```javascript
 execute.[as | at]('selector')...
 
-execute.if.score('player name', 'objective name').is([> | = | < | >= | <= | !=], 'player 2 name', 'player 2 objective'
+execute.if.score('player name', 'objective name').is([> | = | < | >= | <= | !=], 'player 2 name', 'player 2 objective')...
+execute.if.score('player name', 'objective name').matches('..number..')...
+
+execute.store.result.score('player name', 'objective')...
+
+execute...run({optional function})...
+```
+
+this optional function will have a prefix of the execute command for everything inside the function, eg:
+
+```javascript
+execute.as('@a').run(() => {
+
+  say('hi!');
+  
+  say('yay!');
+
+});
+```
+
+this will make:
+
+```mcfunction
+#mc8
+execute as @a run say hi!
+execute as @a run say yay!
+```
+
+you can also layer up execute function like this:
+
+```javascript
+execute.if.score('value', 'athing').matches('..4').at('@r').as('@p').run().say('whoop whoop!');
+```
