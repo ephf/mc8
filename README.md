@@ -62,3 +62,13 @@ for(let i = 0; i < util.item.length; i++) {
 ```
 
 The 'util.item' has a list of all of the items in Minecraft 1.16.
+
+We can add a 'say()' function, which is just the Minecraft 'say' command, with each of the items in minecraft.
+
+```javascript
+for(let i = 0; i < util.item.length; i++) {
+
+  say(util.item[i]);
+
+}
+```
