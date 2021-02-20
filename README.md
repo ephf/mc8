@@ -16,3 +16,9 @@ It has commands as well. it uses minecraft commands that can be put into your da
 # How do I Intall / Use it?
 
 first download [node.js](https://nodejs.org/en/download/)
+
+then in your command prompt (cmd for short) type:
+
+```markdown
+$ npm install mc8 --save
+```
