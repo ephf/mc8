@@ -19,7 +19,7 @@ First, download [node.js](https://nodejs.org/en/download/)
 
 Then in your file, open command promt and 'cd' into your file, then type:
 
-```markdown
+```bash
 $ npm install mc8 --save
 ```
 
@@ -71,4 +71,25 @@ for(let i = 0; i < util.item.length; i++) {
   say(util.item[i]);
 
 }
+```
+
+The file should look like this in total:
+
+```javascript
+const mc8 = require('mc8');
+
+mc8.init();
+
+currentFile('mc8.mcfunction');
+
+// saying every 1.16 item
+for(let i = 0; i < util.item.length; i++) {
+
+  say(util.item[i]);
+
+}
+```
+
+We can then run that on command prompt using node:
+
 ```
