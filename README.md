@@ -28,7 +28,7 @@ $ npm install mc8 --save
 Now that you have it installed, to begin, type this in your javascipt file:
 
 ```javascript
-const mc8 = require("mc8");
+const mc8 = require('mc8');
 ```
 
 Then type:
@@ -40,3 +40,13 @@ mc8.init();
 What this does is initialize mc8, and creates public variables for each of the custom functions so that you don't have to type 'mc8.' before each of the function (you can still do that though)
 
 # How do I Use it?
+
+First, your file should look like this to begin with:
+
+```javascript
+const mc8 = require('mc8');
+
+mc8.init();
+
+currentFile('mc8.mcfunction');
+```
