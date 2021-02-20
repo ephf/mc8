@@ -178,3 +178,16 @@ console.log(util.number.max);
 -2147483647
 2147483647
 ```
+
+# Commands
+
+Current list of commands in mc8 v1.0.0:
+
+* say
+
+```javascript
+say('message');
+```
+
+* scoreboard
+* * hello
