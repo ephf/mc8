@@ -73,7 +73,7 @@ for(let i = 0; i < util.item.length; i++) {
 }
 ```
 
-The file should look like this in total:
+The file should look like this:
 
 ```javascript
 const mc8 = require('mc8');
@@ -123,6 +123,42 @@ say minecraft:allium
 say minecraft:ancient_debris
 say minecraft:andesite
 say minecraft:andesite_slab
+
+# and so on...
+```
+
+We can do the same thing with entities too, we just have to change the 'for' loop:
+
+```javascript
+// saying every 1.16 entity
+for(let i = 0; i < util.entity.length; i++) {
+
+  say(util.entity[i]);
+
+}
+```
+
+Then run, and we will get this:
+
+```mcfunction
+#mc8
+say minecraft:area_effect_cloud
+say minecraft:armor_stand
+say minecraft:arrow
+say minecraft:bat
+say minecraft:bee
+say minecraft:blaze
+say minecraft:boat
+say minecraft:cat
+say minecraft:cave_spider
+say minecraft:chest_minecart
+say minecraft:chicken
+say minecraft:cod
+say minecraft:command_block_minecart
+say minecraft:cow
+say minecraft:creeper
+say minecraft:dolphin
+say minecraft:donkey
 
 # and so on...
 ```
