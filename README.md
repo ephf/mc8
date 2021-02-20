@@ -20,13 +20,13 @@ First, download [node.js](https://nodejs.org/en/download/)
 Then in your file, open command promt and 'cd' into your file, then type:
 
 ```bash
-npm install mc8-beta --save
+npm install mc8-util --save
 ```
 
 Now that you have it installed, to begin, type this in your javascipt file:
 
 ```javascript
-const mc8 = require('mc8');
+const mc8 = require('mc8-util');
 ```
 
 Then type:
@@ -42,7 +42,7 @@ What this does is initialize mc8, and creates public variables for each of the c
 First, your file should look like this to begin with:
 
 ```javascript
-const mc8 = require('mc8');
+const mc8 = require('mc8-util');
 
 mc8.init();
 
@@ -74,7 +74,7 @@ for(let i = 0; i < util.item.length; i++) {
 The file should look like this:
 
 ```javascript
-const mc8 = require('mc8');
+const mc8 = require('mc8-util');
 
 mc8.init();
 

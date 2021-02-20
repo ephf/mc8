@@ -1,0 +1,23 @@
+{
+  "name": "mc8-util",
+  "version": "1.0.0",
+  "description": "javascript to minecraft datapack",
+  "main": "mc8.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ephf/mc8.git"
+  },
+  "keywords": [
+    "minecraft",
+    "datapack"
+  ],
+  "author": "ephf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ephf/mc8/issues"
+  },
+  "homepage": "https://github.com/ephf/mc8#readme"
+}

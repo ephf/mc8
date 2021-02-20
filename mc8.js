@@ -1214,6 +1214,15 @@ var mc8 = {
 					scoreboard = mc8.scoreboard;
 
 				},
+				get(name) {
+
+					this[name] = this.mc8_scores.length;
+					this.mc8_scores.push(name);
+
+					mc8.mc8_writefile(`scoreboard players get ${name} ${Object.keys(mc8.scoreboard)[this.mc8_i]}\n`, mc8.mc8_newfile());
+					scoreboard = mc8.scoreboard;
+
+				},
 				add(name, value) {
 
 					if(Number(value) > -1e10) {
@@ -1511,7 +1520,7 @@ var mc8 = {
 			mc8.scoreboard.random.set('min', min);
 			mc8.scoreboard.random.set('max', max);
 
-			mc8._function(currentDir + ':' + mc8.randomNumberGenerator);
+			mc8._function(currentDir);
 
 		} else
 throw err;
