@@ -20,10 +20,8 @@ First, download [node.js](https://nodejs.org/en/download/)
 Then in your file, open command promt and 'cd' into your file, then type:
 
 ```bash
-$ npm install mc8 --save
+npm install mc8-beta --save
 ```
-
-(*without the dollar sign*)
 
 Now that you have it installed, to begin, type this in your javascipt file:
 
@@ -93,7 +91,7 @@ for(let i = 0; i < util.item.length; i++) {
 We can then run that on command prompt using node:
 
 ```bash
-$ node int.js
+node int.js
 ```
 
 In this case, I named my file 'int.js'
