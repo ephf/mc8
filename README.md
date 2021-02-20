@@ -13,12 +13,20 @@ It also gives a min and max number (-2147483647, 2147483647), along with an auto
 
 It has commands as well. it uses minecraft commands that can be put into your datapack through functions, and I automatically writes the files for you.
 
-# How do I Intall / Use it?
+# How do I Intall it?
 
 first download [node.js](https://nodejs.org/en/download/)
 
-then in your command prompt (cmd for short) type:
+then in your file, open command promt and 'cd' into your file, then type:
 
 ```markdown
 $ npm install mc8 --save
+```
+
+*without the dollar sign*
+
+now that you have it installed, to begin, type this in your javascipt file:
+
+```javascript
+const mc8 = require("mc8");
 ```
