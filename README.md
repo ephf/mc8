@@ -181,7 +181,7 @@ console.log(util.number.max);
 
 # Commands
 
-Current list of commands in mc8 v1.0.0:
+Current list of commands in mc8:
 
 * ### say
 
@@ -196,6 +196,7 @@ scoreboard.add('objective name', 'objective type');
 scoreboard.remove('objective name');
 
 scoreboard.[objective name].[set | add | remove]('player name', 'numeric value');
+scoreboard.[objective name].get('player name');
 scoreboard.[objective name].operation('player name').[add | subtract | multiply | divide | remainder | equal]('player 2 name', 'objective 2 name');
 ```
 
@@ -236,4 +237,123 @@ you can also layer up execute function like this:
 
 ```javascript
 execute.if.score('value', 'athing').matches('..4').at('@r').as('@p').run().say('whoop whoop!');
+
+// or
+
+execute.if.score('value', 'athing').matches('..4').at('@r').as('@p').run(() => {
+
+  say('whoop whoop!');
+
+});
 ```
+
+and you will get:
+
+```mcfunction
+#mc8
+execute if score value athing matches ..4 at @r as @p run say whoop whoop!
+```
+
+* ### kill
+
+```javascript
+kill('selector');
+```
+
+* ### function
+
+```javascript
+_function('function');
+```
+
+We have to use '\_function' instead of 'function' because 'function' is a reserved keyword in javascript
+
+# Miscellaneous
+
+* ### mc8.init();
+
+```javascript
+mc8.init();
+```
+
+initializes mc8
+
+* ### currentFile();
+
+```javascript
+currentFile('current file being writen too') // .mcfunction
+```
+
+* ### util
+
+```javascript
+// every entity in Minecraft 1.16
+typeof util.entity == 'array';
+
+// every item in Minecraft 1.16
+typeof util.entity == 'array';
+
+// minimum and maximum numbers that Minecraft can handle
+typeof util.number.min == 'number'; // -2147483647
+typeof util.number.max == 'number'; // 2147483647
+```
+
+* ### custom();
+
+```javascript
+custom('command');
+```
+
+* ### comment();
+
+```javascript
+comment('comment');
+```
+
+* ### newLine();
+
+```javascript
+newLine();
+```
+
+creates new line
+
+* ### randomNumberGenerator();
+
+```javascript
+randomNumberGenerator('path to random number generator file'); // .mcfunction
+```
+
+creates a random number generator that you can use...
+
+* ### generateRandomNumber();
+
+```javascript
+generateRandomNumber('minimum number', 'maximum number', 'function name');
+```
+
+the 'function name' is the file that you used in 'randomNumberGenerator(filename);' (eg: 'foldername:filename'). This will generate a random number and put it on 'output' from the scoreboard objective 'random'. you can get the number form doing this:
+
+```javascript
+randomNumberGenerator('rng.mcfunction');
+
+generateRandomNumber(0, 50, 'mc8:rng');
+
+scoreboard.random.get('output');
+```
+
+which will make:
+
+```mcfunction
+#mc8
+scoreboard players set min random 0
+scoreboard players set max random 50
+function mc8:rng
+scoreboard players get output random
+```
+
+
+
+
+
+1.0.0 [@ephf](https://www.youtube.com/channel/UCqfHbmI7lEK9vHTF4owbt9w)
