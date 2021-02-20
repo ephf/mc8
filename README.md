@@ -92,4 +92,37 @@ for(let i = 0; i < util.item.length; i++) {
 
 We can then run that on command prompt using node:
 
+```bash
+$ node int.js
+```
+
+In this case, I named my file 'int.js'
+
+In the same folder as my 'int.js' file, a new file will be created; 'mc8.mcfunction', and will have everything that we put in it, a small axample of that code would be:
+
+```mcfunction
+#mc8
+say minecraft:acacia_boat
+say minecraft:acacia_button
+say minecraft:acacia_door
+say minecraft:acacia_fence
+say minecraft:acacia_fence_gate
+say minecraft:acacia_leaves
+say minecraft:acacia_log
+say minecraft:acacia_planks
+say minecraft:acacia_pressure_plate
+say minecraft:acacia_sapling
+say minecraft:acacia_sign
+say minecraft:acacia_slab
+say minecraft:acacia_stairs
+say minecraft:acacia_trapdoor
+say minecraft:acacia_wood
+say minecraft:activator_rail
+say minecraft:air
+say minecraft:allium
+say minecraft:ancient_debris
+say minecraft:andesite
+say minecraft:andesite_slab
+
+# and so on...
 ```
