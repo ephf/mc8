@@ -183,11 +183,25 @@ console.log(util.number.max);
 
 Current list of commands in mc8 v1.0.0:
 
-* say
+* ### say
 
 ```javascript
 say('message');
 ```
 
-* scoreboard
-* * hello
+* ### scoreboard
+
+```javascript
+scoreboard.add('objective name', 'objective type');
+scoreboard.remove('objective name');
+
+scoreboard.[objective name].[set | add | remove]('player name', 'numeric value');
+scoreboard.[objective name].operation('player name').[add | subtract | multiply | divide | remainder | equal]('player 2 name', 'objective 2 name');
+```
+
+* ### execute
+
+```javascript
+execute.[as | at]('selector')...
+
+execute.if.score('player name', 'objective name').is([> | = | < | >= | <= | !=], 'player 2 name', 'player 2 objective'
