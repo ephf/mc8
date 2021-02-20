@@ -50,3 +50,15 @@ mc8.init();
 
 currentFile('mc8.mcfunction');
 ```
+
+Your 'currentFile()' is the current file you are writing to, typically an mcfunction file. This can also be a path (eg. *path/filename.mcfunction*)
+
+To start, we can create 'for' loops for the utility:
+
+```javascript
+for(let i = 0; i < util.item.length; i++) {
+
+}
+```
+
+The 'util.item' has a list of all of the items in Minecraft 1.16.
