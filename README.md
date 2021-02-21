@@ -279,7 +279,7 @@ initializes mc8
 * ### currentFile();
 
 ```javascript
-currentFile('current file being writen too') // .mcfunction
+currentFile('current file being writen to') // .mcfunction
 ```
 
 * ### util

@@ -1,3 +1,5 @@
+// made by @ephf on YouTube
+
 var mc8 = {
 	fs: require('fs'),
 	cfn: false,
@@ -1498,6 +1500,7 @@ var mc8 = {
 
 		});
 
+		mc8.scoreboard.randominit.set('bool', 1);
 		mc8.scoreboard.random.operation('mainint').multiply('multint', 'random').subtract('pos', 'random');
 		mc8.scoreboard.random.operation('multint').subtract('pos', 'random');
 		mc8.execute.if.score('mainint', 'random').matches('..0').run().scoreboard.random.operation('mainint').multiply('pos', 'random');
