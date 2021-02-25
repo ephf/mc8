@@ -1,4 +1,6 @@
-# What is mc8? ![](mc8.png)
+![](mc8.png)
+
+# What is mc8?
 
 mc8 is a node.js and javascript tool for creating Minecraft datapacks.
 it comes with utility such as:
@@ -7,7 +9,7 @@ it comes with utility such as:
 
 * All entities
 
-* All blocks (comming soon)
+* All blocks
 
 It also gives a min and max number (-2147483647, 2147483647), along with an auto-building random number generator!
 
@@ -268,6 +270,16 @@ We have to use '\_function' instead of 'function' because 'function' is a reserv
 
 # Miscellaneous
 
+* ## datapack
+
+```javascript
+datapack.path('path-to-datapack');
+
+datapack.generate('name' [default: `mc8-unnamed-${count}`], 'description' [default: 'made with mc8!'], 'function-name' [default: `mc8-unnamed-${count}`]);
+```
+
+creates a datapack template
+
 * ### mc8.init();
 
 ```javascript
@@ -290,6 +302,9 @@ typeof util.entity == 'array';
 
 // every item in Minecraft 1.16
 typeof util.entity == 'array';
+
+//every block in Minecraft 1.16
+typeof util.block == 'array';
 
 // minimum and maximum numbers that Minecraft can handle
 typeof util.number.min == 'number'; // -2147483647
@@ -350,4 +365,24 @@ function mc8:rng
 scoreboard players get output random
 ```
 
-[@ephf](https://www.youtube.com/channel/UCqfHbmI7lEK9vHTF4owbt9w)
+* ### playerTrackingCompass();
+
+```javascript
+playerTrackingCompass();
+```
+
+creates a player tracking compass,
+
+to use type command:
+
+```mcfunction
+tag {PLAYERNAME} add track
+```
+
+and to get compass:
+
+```mcfunction
+trigger compass
+```
+
+[@ephf](https://www.youtube.com/channel/UCqfHbmI7lEK9vHTF4owbt9w) - 1.16
