@@ -1530,6 +1530,54 @@ throw err;
 
 		return 'output random';
 
+	},
+	datapack: {
+
+		mc8_path: '',
+		mc8_unnamed_datapack_num: 0,
+		mc8_unnamed_function_num: 0,
+		path(path) {
+
+			this.mc8_path = path;
+
+			let paths = path.split('/');
+
+			let reload = () => {
+
+				if(!mc8.fs.existsSync(paths[0])) {
+					mc8.fs.mkdirSync(paths[0]);
+				}
+
+				if(paths.length > 1) {
+					console.log(paths);
+					let currentPath = paths[0];
+					paths.shift();
+					paths[0] = currentPath + '/' + paths[0];
+					reload();
+				}
+
+			}
+
+			reload();
+
+		},
+		generate(name, desc, _function) {
+
+			let dir = (this.mc8_path == '' ? '.' : this.mc8_path) + '/' + (name ? name : 'mc8-unnamed-' + this.mc8_unnamed_datapack_num);
+
+			if(!name) this.mc8_unnamed_datapack_num ++;
+
+			if(!desc) desc = 'made with mc8';
+
+			if(!_function) {
+				_function = 'mc8-unnamed-' + this.mc8_unnamed_function_num;
+				this.mc8_unnamed_function_num ++;
+			}
+
+			console.log(`'${dir}' '${desc}' '${_function}'`);
+
+		}
+
 	}
 }
 

@@ -1,4 +1,4 @@
-# What is mc8?
+# What is mc8? ![](mc8.png)
 
 mc8 is a node.js and javascript tool for creating Minecraft datapacks.
 it comes with utility such as:
@@ -193,7 +193,7 @@ say('message');
 scoreboard.add('objective name', 'objective type');
 scoreboard.remove('objective name');
 
-scoreboard.[objective name].[set | add | remove]('player name', 'numeric value');
+scoreboard.[objective name].[set | add | remove]('player name', 'number');
 scoreboard.[objective name].get('player name');
 scoreboard.[objective name].operation('player name').[add | subtract | multiply | divide | remainder | equal]('player 2 name', 'objective 2 name');
 ```
@@ -350,8 +350,4 @@ function mc8:rng
 scoreboard players get output random
 ```
 
-
-
-
-
-1.0.0 [@ephf](https://www.youtube.com/channel/UCqfHbmI7lEK9vHTF4owbt9w)
+[@ephf](https://www.youtube.com/channel/UCqfHbmI7lEK9vHTF4owbt9w)
