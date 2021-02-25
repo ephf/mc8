@@ -1,4 +1,4 @@
-![](mc8.png) { width: 150px; }
+![](mc8.png =150x150)
 
 # What is mc8?
 
