@@ -1,4 +1,6 @@
-![](mc8.png =150x150)
+<img src='mc8.png' width='150'>
+
+![](mc8.png)
 
 # What is mc8?
 
