@@ -345,7 +345,11 @@ creates a random number generator that you can use...
 generateRandomNumber('minimum number', 'maximum number', 'function name');
 ```
 
-the 'function name' is the file that you used in 'randomNumberGenerator(filename);' (eg: 'foldername:filename'). This will generate a random number and put it on 'output' from the scoreboard objective 'random'. you can get the number form doing this:
+the 'function name' is the file that you used in 
+```javascript
+randomNumberGenerator(filename);
+``` 
+(eg: 'foldername:filename'). This will generate a random number and put it on 'output' from the scoreboard objective 'random'. you can get the number form doing this:
 
 ```javascript
 randomNumberGenerator('rng.mcfunction');
@@ -384,5 +388,52 @@ and to get compass:
 ```mcfunction
 trigger compass
 ```
+
+* ### trigger();
+
+```javascript
+trigger('name', {function}, 'remove score' [default: true]);
+
+// use
+
+trigger('hello', () => {
+	say('hello');
+});
+```
+
+this creates a `/trigger` scoreboard, and when triggered says hi,
+
+```mcfunction
+#mc8
+scoreboard objectives add hello trigger
+scoreboard players enable @a hello
+execute as @a[scores={hello=1..}] run say hello
+scoreboard players set @a hello 0
+```
+
+setting the remove score to false, will remove the last line of code:
+
+*input*
+
+```javascript
+trigger('hi', () => {
+	say('hi');
+}, false);   // last argument is now false
+```
+
+*output*
+
+```mcfunction
+#mc8
+scoreboard objectives add hi trigger
+scoreboard players enable @a hi
+execute as @a[scores={hi=1..}] run say hi
+```
+
+this will also add an interactive scoreboard that you can use with the 
+```javascript
+scoreboard.[name]();
+``` 
+function
 
 [@ephf](https://www.youtube.com/channel/UCqfHbmI7lEK9vHTF4owbt9w) - 1.16

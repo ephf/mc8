@@ -7,7 +7,7 @@ var mc8 = {
 	init() {
 
 		let mc8obj = Object.keys(mc8);
-		let dontuse = ['fs', 'cfn', 'file', 'mc8_writefile', 'mc8_newfile'];
+		let dontuse = ['fs', 'cfn', 'file', 'mc8_writefile', 'mc8_newfile', 'trigger_prefix'];
 
 		for(let i = 0; i < mc8obj.length; i++) {
 
@@ -34,7 +34,9 @@ var mc8 = {
 	},
 	mc8_writefile(add, byp, du) {
 
-		mc8.file[byp].value += execute.prefix;
+		mc8.file[byp].value += mc8.trigger_prefix;
+
+		mc8.file[byp].value += mc8.execute.prefix;
 
 		mc8.file[byp].value += add;
 
@@ -2368,6 +2370,22 @@ throw err;
 	playerTrackingCompass() {
 
 		mc8.mc8_writefile('scoreboard objectives add compass trigger\nscoreboard players enable @a compass\nexecute as @a[scores={compass=1..}] run give @s compass{display:{Name:\'[{"text":"Player Tracking Compass","italic":false}]\'}}\nscoreboard players set @a compass 0\nexecute at @e[tag=track] run setworldspawn ~ ~ ~\n', mc8.mc8_newfile());
+
+	},
+	trigger_prefix: '',
+	trigger(name, func, removescore) {
+
+		mc8.scoreboard.add(name, 'trigger');
+
+		mc8.mc8_writefile(`scoreboard objectives add ${name} trigger\nscoreboard players enable @a ${name}\n`, mc8.mc8_newfile());
+
+		mc8.trigger_prefix = `execute as @a[scores={${name}=1..}] run `;
+
+		func();
+
+		mc8.trigger_prefix = '';
+
+		if(removescore !== false) mc8.mc8_writefile(`scoreboard players set @a ${name} 0\n`, mc8.mc8_newfile());
 
 	}
 }

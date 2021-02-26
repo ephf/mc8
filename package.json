@@ -1,6 +1,6 @@
 {
   "name": "mc8-util",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "javascript to minecraft datapack",
   "main": "mc8.js",
   "scripts": {
@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/ephf/mc8#readme",
   "dependencies": {
-    "mc8-util": "^1.1.2"
+    "mc8-util": "^1.1.3"
   }
 }
