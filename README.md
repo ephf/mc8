@@ -268,6 +268,12 @@ _function('function');
 
 We have to use `_function` instead of `function` because `function` is a reserved keyword in javascript
 
+* ### tellraw
+
+```javascript
+tellraw('selector', [{'json'}]);
+```
+
 # Miscellaneous
 
 * ## datapack
@@ -309,6 +315,48 @@ typeof util.block == 'array';
 // minimum and maximum numbers that Minecraft can handle
 typeof util.number.min == 'number'; // -2147483647
 typeof util.number.max == 'number'; // 2147483647
+```
+
+* ### util - minecraft
+
+```javascript
+// examples:
+minecraft.diamond == 'minecraft:diamond';
+minecraft.skeleton == 'minecraft:skeleton';
+minecraft.player == 'minecraft:player';
+
+minecraft._diamond == '!minecraft:diamond';
+minecraft._skeleton == '!minecraft:skeleton';
+minecraft._player == '!minecraft:player';
+```
+
+* ### selectors
+
+```javascript
+aa({'selectors'});
+```
+
+there are 4 types of this function:
+
+```javascript
+aa() == '@a';
+ap() == '@p';
+ar() == '@r';
+ae() == '@e';
+```
+
+you can use the selectors like this:
+
+*input*
+
+```javascript
+/*console.log(*/  ae({'type': [minecraft.zombie, minecraft._player], 'distance': '..7'})  //);
+```
+
+*output*
+
+```
+@e[type=minecraft:zombie,type=!minecraft:player,distance=..7]
 ```
 
 * ### custom();

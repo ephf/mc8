@@ -7,7 +7,7 @@ var mc8 = {
 	init() {
 
 		let mc8obj = Object.keys(mc8);
-		let dontuse = ['fs', 'cfn', 'file', 'mc8_writefile', 'mc8_newfile', 'trigger_prefix'];
+		let dontuse = ['fs', 'cfn', 'file', 'mc8_writefile', 'mc8_newfile', 'trigger_prefix', 'at_suffix'];
 
 		for(let i = 0; i < mc8obj.length; i++) {
 
@@ -30,6 +30,18 @@ var mc8 = {
 			}
 
 		}
+
+		minecraft = {
+
+			player: 'minecraft:player',
+			_player: '!minecraft:player'
+
+		};
+
+		util.entity.forEach(i => minecraft[i.split('minecraft:')[1]] = i);
+		util.entity.forEach(i => minecraft['_' + i.split('minecraft:')[1]] = '!' + i);
+		util.item.forEach(i => minecraft[i.split('minecraft:')[1]] = i);
+		util.item.forEach(i => minecraft['_' + i.split('minecraft:')[1]] = '!' + i);
 
 	},
 	mc8_writefile(add, byp, du) {
@@ -2387,7 +2399,46 @@ throw err;
 
 		if(removescore !== false) mc8.mc8_writefile(`scoreboard players set @a ${name} 0\n`, mc8.mc8_newfile());
 
-	}
+	},
+	tellraw(name, json) {
+
+		mc8.mc8_writefile(`tellraw ${name} ${JSON.stringify(json)}`, mc8.mc8_newfile());
+
+	},
+	at_suffix(sel) {
+
+		let self = '';
+
+		if(sel) {
+
+			self += '[';
+
+			let tags = Object.keys(sel);
+			tags.forEach(t => {
+
+				if(typeof sel[t] == 'object') {
+
+					sel[t].forEach(i => self += t + '=' + i + (t.indexOf(i) == t.length - 1 && tags.indexOf(t) == tags.length - 1 ? '' : ','));
+
+				} else {
+
+					self += t + '=' + sel[t] + (tags.indexOf(t) == tags.length - 1 ? '' : ',');
+
+				}
+
+			});
+
+			self += ']';
+
+		}
+
+		return self;
+
+	},
+	aa(sel) { return '@a' +  mc8.at_suffix(sel) },
+	ap(sel) { return '@p' +  mc8.at_suffix(sel) },
+	ar(sel) { return '@r' +  mc8.at_suffix(sel) },
+	ae(sel) { return '@e' +  mc8.at_suffix(sel) }
 }
 
 module.exports = mc8;
