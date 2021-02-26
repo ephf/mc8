@@ -2362,8 +2362,6 @@ throw err;
 				mc8.fs.mkdirSync(dir + '/data/' + _function + '/functions');
 			}
 
-			console.log(`'${dir}' '${desc}' '${_function}'`);
-
 		}
 
 	},
