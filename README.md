@@ -19,7 +19,7 @@ It has commands as well. it uses minecraft commands that can be put into your da
 
 First, download [node.js](https://nodejs.org/en/download/)
 
-Then in your file, open command promt and 'cd' into your file, then type:
+Then in your file, open command promt and `cd` into your file, then type:
 
 ```bash
 npm install mc8-util --save
@@ -37,7 +37,7 @@ Then type:
 mc8.init();
 ```
 
-What this does is initialize mc8, and creates public variables for each of the custom functions so that you don't have to type 'mc8.' before each of the function (you can still do that though)
+What this does is initialize mc8, and creates public variables for each of the custom functions so that you don't have to type `mc8.` before each of the function (you can still do that though)
 
 # How do I Use it?
 
@@ -51,7 +51,7 @@ mc8.init();
 currentFile('mc8.mcfunction');
 ```
 
-Your 'currentFile()' is the current file you are writing to, typically an mcfunction file. This can also be a path (eg. *path/filename.mcfunction*)
+Your `currentFile()` is the current file you are writing to, typically an mcfunction file. This can also be a path (eg. *path/filename.mcfunction*)
 
 To start, we can create 'for' loops for the utility:
 
@@ -61,9 +61,9 @@ for(let i = 0; i < util.item.length; i++) {
 }
 ```
 
-The 'util.item' has a list of all of the items in Minecraft 1.16.
+The `util.item` has a list of all of the items in Minecraft 1.16.
 
-We can add a 'say()' function, which is just the Minecraft 'say' command, with each of the items in minecraft.
+We can add a `say()` function, which is just the Minecraft `say` command, with each of the items in minecraft.
 
 ```javascript
 for(let i = 0; i < util.item.length; i++) {
@@ -96,9 +96,9 @@ We can then run that on command prompt using node:
 node int.js
 ```
 
-In this case, I named my file 'int.js'
+In this case, I named my file `int.js`
 
-In the same folder as my 'int.js' file, a new file will be created; 'mc8.mcfunction', and will have everything that we put in it, a small axample of that code would be:
+In the same folder as my `int.js` file, a new file will be created; `mc8.mcfunction`, and will have everything that we put in it, a small axample of that code would be:
 
 ```mcfunction
 #mc8
@@ -127,7 +127,7 @@ say minecraft:andesite_slab
 # and so on...
 ```
 
-We can do the same thing with entities too, we just have to change the 'for' loop:
+We can do the same thing with entities too, we just have to change the `for` loop:
 
 ```javascript
 // saying every 1.16 entity
@@ -266,7 +266,7 @@ kill('selector');
 _function('function');
 ```
 
-We have to use '\_function' instead of 'function' because 'function' is a reserved keyword in javascript
+We have to use `_function` instead of `function` because `function` is a reserved keyword in javascript
 
 # Miscellaneous
 
@@ -345,11 +345,7 @@ creates a random number generator that you can use...
 generateRandomNumber('minimum number', 'maximum number', 'function name');
 ```
 
-the 'function name' is the file that you used in 
-```javascript
-randomNumberGenerator(filename);
-``` 
-(eg: 'foldername:filename'). This will generate a random number and put it on 'output' from the scoreboard objective 'random'. you can get the number form doing this:
+the `function name` is the file that you used in `randomNumberGenerator(filename)` (eg: `foldername:filename`). This will generate a random number and put it on `output` from the scoreboard objective `random`. you can get the number form doing this:
 
 ```javascript
 randomNumberGenerator('rng.mcfunction');
@@ -430,10 +426,6 @@ scoreboard players enable @a hi
 execute as @a[scores={hi=1..}] run say hi
 ```
 
-this will also add an interactive scoreboard that you can use with the 
-```javascript
-scoreboard.[name]();
-``` 
-function
+this will also add an interactive scoreboard that you can use with the `scoreboard.[name]()` function
 
 [@ephf](https://www.youtube.com/channel/UCqfHbmI7lEK9vHTF4owbt9w) - 1.16
