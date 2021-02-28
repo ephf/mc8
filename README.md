@@ -236,11 +236,11 @@ say('message');
 
 ```javascript
 scoreboard.add('objective name', 'objective type');
-scoreboard.remove('objective name');
 
 scoreboard.[objective name].[set | add | remove]('player name', 'number');
 scoreboard.[objective name].get('player name');
 scoreboard.[objective name].operation('player name').[add | subtract | multiply | divide | remainder | equal]('player 2 name', 'objective 2 name');
+scoreboard.[objective name].remove();
 ```
 
 * ### execute
@@ -320,7 +320,14 @@ tellraw('selector', [{'json'}]);
 * ### clear
 
 ```javascript
-clear('selector', 'item', 'count');
+clear('selector', [optional: 'item'], [optional: 'count']);
+```
+
+* ### effect
+
+```javascript
+effect.give('selector', 'effect id', 'time', 'level', [optional: 'display particles']);
+effect.clear('selector', [optional: 'effect id']);
 ```
 
 # Miscellaneous
@@ -328,7 +335,7 @@ clear('selector', 'item', 'count');
 * ## datapack
 
 ```javascript
-datapack.path('path-to-datapack');
+datapack.path('path-to-datapack');  // optional
 
 datapack.generate('name' [default: `mc8-unnamed-${count}`], 'description' [default: 'made with mc8!'], 'function-name' [default: `mc8-unnamed-${count}`]);
 ```
@@ -353,7 +360,7 @@ initializes mc8
 * ### currentFile();
 
 ```javascript
-currentFile('current file being writen to') // .mcfunction
+currentFile('current file being writen to');
 ```
 
 * ### util
@@ -381,9 +388,16 @@ minecraft.diamond == 'minecraft:diamond';
 minecraft.skeleton == 'minecraft:skeleton';
 minecraft.player == 'minecraft:player';
 
-minecraft._diamond == '!minecraft:diamond';
 minecraft._skeleton == '!minecraft:skeleton';
 minecraft._player == '!minecraft:player';
+```
+
+* ### util - ticks
+
+```javascript
+util.s(4) == 80;      // seconds to ticks
+util.m(5) == 6000;    // minutes to ticks
+util.h(3) == 216000;  // hours to ticks
 ```
 
 * ### selectors
@@ -406,7 +420,7 @@ you can use the selectors like this:
 *input*
 
 ```javascript
-/*console.log(*/  ae({'type': [minecraft.zombie, minecraft._player], 'distance': '..7'})  //);
+ae({'type': [minecraft.zombie, minecraft._player], 'distance': '..7'});
 ```
 
 *output*
@@ -438,7 +452,7 @@ creates new line
 * ### randomNumberGenerator();
 
 ```javascript
-randomNumberGenerator('path to random number generator file'); // .mcfunction
+randomNumberGenerator([{if datapack not opened}: 'path to random number generator file']);
 ```
 
 creates a random number generator that you can use...
@@ -446,7 +460,7 @@ creates a random number generator that you can use...
 * ### generateRandomNumber();
 
 ```javascript
-generateRandomNumber('minimum number', 'maximum number', 'function name');
+generateRandomNumber('minimum number', 'maximum number', [{if datapack not opened}: 'function name']);
 ```
 
 the `function name` is the file that you used in `randomNumberGenerator(filename)` (eg: `foldername:filename`). This will generate a random number and put it on `output` from the scoreboard objective `random`. you can get the number form doing this:

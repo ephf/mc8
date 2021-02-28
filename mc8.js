@@ -41,7 +41,6 @@ var mc8 = {
 		util.entity.forEach(i => minecraft[i.split('minecraft:')[1]] = i);
 		util.entity.forEach(i => minecraft['_' + i.split('minecraft:')[1]] = '!' + i);
 		util.item.forEach(i => minecraft[i.split('minecraft:')[1]] = i);
-		util.item.forEach(i => minecraft['_' + i.split('minecraft:')[1]] = '!' + i);
 
 	},
 	mc8_writefile(add, byp, du) {
@@ -1937,7 +1936,25 @@ var mc8 = {
 		number: {
 			min: -2147483647,
 			max: 2147483647
-		}
+		},
+		s(sec) {
+
+			return sec * 20;
+
+		},
+		m(min) {
+
+			return mc8.util.s(min) * 60;
+
+		},
+		h(hour) {
+
+			return mc8.util.m(hour) * 60;
+
+		},
+		tps: 20,
+		tpm: 20 * 60,
+		tph: 20 * 60 * 60
 
 	},
 	custom(value) {
@@ -2087,9 +2104,11 @@ var mc8 = {
 					return self;
 
 				},
-				mc8_getitem() {
+				remove() {
 
-					return this;
+					mc8.mc8_writefile(`scoreboard objectives remove ${Object.keys(mc8.scoreboard)[this.mc8_i]}\n`, mc8.mc8_newfile());
+
+					mc8.scoreboard[Object.keys(mc8.scoreboard)[this.mc8_i]] = 'removed';
 
 				},
 				mc8_scores: []
@@ -2097,13 +2116,6 @@ var mc8 = {
 			};
 
 			mc8.mc8_writefile(`scoreboard objectives add ${name} ${type}\n`, mc8.mc8_newfile());
-
-		},
-		remove(name) {
-
-			mc8.scoreboard[name] = 'removed';
-
-			mc8.mc8_writefile(`scoreboard objectives remove ${name}\n`, mc8.mc8_newfile());
 
 		}
 
@@ -2491,6 +2503,20 @@ throw err;
 	clear(name, item, count) {
 
 		mc8.mc8_writefile(`clear ${name}${item ? ' ' + item : ''}${count > mc8.util.number.min ? ' ' + count : ''}\n`, mc8.mc8_newfile());
+
+	},
+	effect: {
+
+		give(name, id, time, lvl, display) {
+
+			mc8.mc8_writefile(`effect give ${name} ${id} ${time} ${lvl}${display !== undefined ? ' ' + display : ''}\n`, mc8.mc8_newfile());
+
+		},
+		clear(name, id) {
+
+			mc8.mc8_writefile(`effect clear ${name}${id ? ' ' + id : ''}\n`, mc8.mc8_newfile());
+
+		}
 
 	}
 }
