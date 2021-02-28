@@ -42,6 +42,27 @@ var mc8 = {
 		util.entity.forEach(i => minecraft['_' + i.split('minecraft:')[1]] = '!' + i);
 		util.item.forEach(i => minecraft[i.split('minecraft:')[1]] = i);
 
+		tick = {
+			s(sec) {
+
+				return sec * 20;
+
+			},
+			m(min) {
+
+				return tick.s(min) * 60;
+
+			},
+			h(hour) {
+
+				return tick.m(hour) * 60;
+
+			},
+			tps: 20,
+			tpm: 20 * 60,
+			tph: 20 * 60 * 60
+		}
+
 	},
 	mc8_writefile(add, byp, du) {
 
@@ -1936,25 +1957,7 @@ var mc8 = {
 		number: {
 			min: -2147483647,
 			max: 2147483647
-		},
-		s(sec) {
-
-			return sec * 20;
-
-		},
-		m(min) {
-
-			return mc8.util.s(min) * 60;
-
-		},
-		h(hour) {
-
-			return mc8.util.m(hour) * 60;
-
-		},
-		tps: 20,
-		tpm: 20 * 60,
-		tph: 20 * 60 * 60
+		}
 
 	},
 	custom(value) {

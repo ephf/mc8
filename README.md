@@ -395,9 +395,13 @@ minecraft._player == '!minecraft:player';
 * ### util - ticks
 
 ```javascript
-util.s(4) == 80;      // seconds to ticks
-util.m(5) == 6000;    // minutes to ticks
-util.h(3) == 216000;  // hours to ticks
+tick.s(4) == 80;      // seconds to ticks
+tick.m(5) == 6000;    // minutes to ticks
+tick.h(3) == 216000;  // hours to ticks
+
+tick.tps == 20;       // ticks per second
+tick.tpm == 1200;     // ticks per minute
+tick.tph == 72000;    // ticks per hour
 ```
 
 * ### selectors
