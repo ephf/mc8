@@ -179,6 +179,49 @@ console.log(util.number.max);
 2147483647
 ```
 
+You can also create datapacks and open them
+
+begin by using `mc8.init()` then use the `datapack` functions:
+
+```javascript
+const mc8 = require('mc8-util');
+mc8.init();
+
+datapack.path('datapack');      // sets a path for your datapack
+datapack.generate('mc8');       // generates a datapack template in the path: 'datapack/mc8'
+datapack.open('datapack/mc8');  // opens the datapack so that we can use shortcuts while generating files
+```
+
+now when we use `currentFile()`, we will use functions:
+
+```javascript
+currentFile('folder:function');
+```
+
+this won't currently work because we haven't created the folder for the function, we can do this by using `datapack.addFolder()`:
+
+```javascript
+datapack.addFolder('install');
+```
+
+now we can set our file to `install:load`:
+
+```javascript
+currentFile('install:load');
+```
+
+we can also hook it up to the `load.json` file in the minecraft folder so that it starts when we load the datapack:
+
+```javascript
+datapack.setFunctionLoad('install:load');
+```
+
+and the same with `tick.json`:
+
+```javascript
+datapack.setFunctionTick('install:load');
+```
+
 # Commands
 
 Current list of commands in mc8:

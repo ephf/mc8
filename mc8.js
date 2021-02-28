@@ -1957,7 +1957,8 @@ var mc8 = {
 	},
 	currentFile(name) {
 
-		mc8.cfn = name;
+		if(!mc8.datapack.file.opened) mc8.cfn = name; else
+		mc8.cfn = mc8.datapack.file.folder + '/data/' + name.split(':')[0] + '/functions/' + name.split(':')[1] + '.mcfunction';
 
 	},
 	say(value) {
@@ -2254,7 +2255,18 @@ var mc8 = {
 
 		let otherfile = mc8.cfn;
 
-		mc8.cfn = file;
+		mc8.cfn = !mc8.datapack.file.opened ? file : mc8.datapack.file.folder + '/data/random/functions/generate';
+
+		if(mc8.datapack.file.opened) {
+
+			if(!mc8.fs.existsSync(mc8.datapack.file.folder + '/data/random')) {
+				mc8.fs.mkdirSync(mc8.datapack.file.folder + '/data/random');
+			}
+			if(!mc8.fs.existsSync(mc8.datapack.file.folder + '/data/random/functions')) {
+				mc8.fs.mkdirSync(mc8.datapack.file.folder + '/data/random/functions');
+			}
+
+		}
 
 		mc8.scoreboard.add('random', 'dummy');
 		mc8.scoreboard.add('randominit', 'dummy');
@@ -2292,6 +2304,8 @@ var mc8 = {
 		let err = 'randomNumberGenerator not created: randomNumberGenerator(<filename>);';
 
 		if(typeof mc8.randomNumberGenerator != 'function') {
+
+			if(mc8.datapack.file.opened) currentDir = mc8.datapack.file.folder + '/data/random/functions/generate';
 
 			mc8.scoreboard.random.set('min', min);
 			mc8.scoreboard.random.set('max', max);
@@ -2341,11 +2355,6 @@ throw err;
 
 			if(!desc) desc = 'made with mc8';
 
-			if(!_function) {
-				_function = 'mc8-unnamed-' + this.mc8_unnamed_function_num;
-				this.mc8_unnamed_function_num ++;
-			}
-
 			if(!mc8.fs.existsSync(dir)) {
 				mc8.fs.mkdirSync(dir);
 			}
@@ -2369,13 +2378,53 @@ throw err;
 			mc8.fs.writeFileSync(dir + '/data/minecraft/tags/functions/load.json', `{ "values": [ "YOUR-FUNCTION-HERE" ] }`);
 			mc8.fs.writeFileSync(dir + '/data/minecraft/tags/functions/tick.json', `{ "values": [ "YOUR-FUNCTION-HERE" ] }`);	
 
-			if(!mc8.fs.existsSync(dir + '/data/' + _function)) {
-				mc8.fs.mkdirSync(dir + '/data/' + _function);
-			}
-			if(!mc8.fs.existsSync(dir + '/data/' + _function + '/functions')) {
-				mc8.fs.mkdirSync(dir + '/data/' + _function + '/functions');
+			if(_function) {
+
+				if(!mc8.fs.existsSync(dir + '/data/' + _function)) {
+					mc8.fs.mkdirSync(dir + '/data/' + _function);
+				}
+				if(!mc8.fs.existsSync(dir + '/data/' + _function + '/functions')) {
+					mc8.fs.mkdirSync(dir + '/data/' + _function + '/functions');
+				}
+
 			}
 
+		},
+		addFolder(name) {
+
+			if(!mc8.fs.existsSync(mc8.datapack.file.folder + '/data/' + name)) {
+				mc8.fs.mkdirSync(mc8.datapack.file.folder + '/data/' + name);
+			}
+			if(!mc8.fs.existsSync(mc8.datapack.file.folder + '/data/' + name + '/functions')) {
+				mc8.fs.mkdirSync(mc8.datapack.file.folder + '/data/' + name + '/functions');
+			}
+
+		},
+		setFunctionLoad(name) {
+
+			let loadjson = mc8.fs.readFileSync(mc8.datapack.file.folder + '/data/minecraft/tags/functions/load.json', 'utf-8');
+			loadjson = JSON.parse(loadjson);
+			if(loadjson.values[0] == 'YOUR-FUNCTION-HERE') loadjson.values[0] = name; else loadjson.values.push(name);
+			mc8.fs.writeFileSync(mc8.datapack.file.folder + '/data/minecraft/tags/functions/load.json', JSON.stringify(loadjson));
+
+		},
+		setFunctionTick(name) {
+
+			let tickjson = mc8.fs.readFileSync(mc8.datapack.file.folder + '/data/minecraft/tags/functions/tick.json', 'utf-8');
+			tickjson = JSON.parse(tickjson);
+			if(tickjson.values[0] == 'YOUR-FUNCTION-HERE') tickjson.values[0] = name; else tickjson.values.push(name);
+			mc8.fs.writeFileSync(mc8.datapack.file.folder + '/data/minecraft/tags/functions/tick.json', JSON.stringify(tickjson));
+
+		},
+		open(name) {
+
+			mc8.datapack.file.opened = true;
+			mc8.datapack.file.folder = name;
+
+		},
+		file: {
+			opened: false,
+			folder: undefined,
 		}
 
 	},
