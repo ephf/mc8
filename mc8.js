@@ -2451,7 +2451,7 @@ throw err;
 	},
 	tellraw(name, json) {
 
-		mc8.mc8_writefile(`tellraw ${name} ${JSON.stringify(json)}`, mc8.mc8_newfile());
+		mc8.mc8_writefile(`tellraw ${name} ${JSON.stringify(json)}\n`, mc8.mc8_newfile());
 
 	},
 	at_suffix(sel) {
@@ -2487,7 +2487,12 @@ throw err;
 	aa(sel) { return '@a' +  mc8.at_suffix(sel) },
 	ap(sel) { return '@p' +  mc8.at_suffix(sel) },
 	ar(sel) { return '@r' +  mc8.at_suffix(sel) },
-	ae(sel) { return '@e' +  mc8.at_suffix(sel) }
+	ae(sel) { return '@e' +  mc8.at_suffix(sel) },
+	clear(name, item, count) {
+
+		mc8.mc8_writefile(`clear ${name}${item ? ' ' + item : ''}${count > mc8.util.number.min ? ' ' + count : ''}\n`, mc8.mc8_newfile());
+
+	}
 }
 
 module.exports = mc8;

@@ -219,7 +219,7 @@ datapack.setFunctionLoad('install:load');
 and the same with `tick.json`:
 
 ```javascript
-datapack.setFunctionTick('install:load');
+datapack.setFunctionTick('install:loop');
 ```
 
 # Commands
@@ -317,6 +317,12 @@ We have to use `_function` instead of `function` because `function` is a reserve
 tellraw('selector', [{'json'}]);
 ```
 
+* ### clear
+
+```javascript
+clear('selector', 'item', 'count');
+```
+
 # Miscellaneous
 
 * ## datapack
@@ -327,7 +333,14 @@ datapack.path('path-to-datapack');
 datapack.generate('name' [default: `mc8-unnamed-${count}`], 'description' [default: 'made with mc8!'], 'function-name' [default: `mc8-unnamed-${count}`]);
 ```
 
-creates a datapack template
+creates a datapack template, and
+
+```javascript
+datapack.open('path-to-datapack');
+datapack.addFolder('name');
+datapack.setFunctionTick('folder:function');
+datapack.setFunctionLoad('folder:function');
+```
 
 * ### mc8.init();
 
