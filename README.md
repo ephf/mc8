@@ -1,6 +1,4 @@
-[![Latest version](https://img.shields.io/github/v/release/ephf/mc8?label=latest&style=flat-square)](https://github.com/ephf/mc8/releases)
 [![npm downloads](https://img.shields.io/npm/dt/mc8-util?style=flat-square)](https://www.npmjs.com/package/mc8-util)
-[![Last updated](https://img.shields.io/github/release-date-pre/ephf/mc8?label=updated&style=flat-square)](https://github.com/ephf/mc8/releases)
 
 <img src='mc8.png' width='250'>
 
