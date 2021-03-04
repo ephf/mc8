@@ -2521,7 +2521,91 @@ throw err;
 
 		}
 
+	},
+	data: {
+		get: {
+			storage(name, val, ex) {
+				mc8.mc8_writefile(`data get storage ${name} ${val}${ex ? ' ' + ex : ''}`, mc8.mc8_newfile());
+			}
+		},
+		modify: {
+			storage(name, val) {
+				mc8.mc8_writefile(`data modify storage ${name} ${val} `, mc8.mc8_newfile());
+				return mc8.data.re;
+			}
+		},
+		re: {
+			set: {
+				value(val) {
+					mc8.mc8_writefile(`set value ${stringify(val)}\n`, mc8.mc8_newfile());
+				}
+			},
+			append: {
+				value(val) {
+					mc8.mc8_writefile(`append value ${stringify(val)}\n`, mc8.mc8_newfile());
+				}
+			}
+		}
+	},
+	economy: {
+		create() {
+
+			let err = '[mc8] in order to use economy.create(), you have to open a datapack';
+			if(!mc8.datapack.file.opened) {
+throw err
+			} else {
+
+				mc8.datapack.addFolder('economy');
+				let lastFile = mc8.cfn;
+				mc8.currentFile('economy:load');
+				mc8.datapack.setFunctionLoad('economy:load');
+
+				mc8.scoreboard.add('money', 'dummy');
+				mc8.data.modify.storage('eco-items', 'sell').set.value([]);
+
+				mc8.currentFile('economy:cmds');
+				mc8.datapack.setFunctionTick('economy:cmds');
+
+				mc8.trigger('bal', () => {
+					mc8.tellraw('@s', [{"text":"Your Balance: $","color":"yellow"},{"score":{"name":"@s","objective":"money"}}]);
+				});
+				mc8.trigger('sellhand', () => {
+					//sell item
+				});
+
+				mc8.cfn = lastFile;
+
+			}
+
+		},
+		sell(id, price) {
+
+			let lastFile = mc8.cfn;
+			mc8.currentFile('economy:load');
+
+			data.modify.storage('eco-items', 'sell').append.value({id:`${id}`,price:price});
+
+			mc8.cfn = lastFile;
+
+		}
 	}
 }
+
+// NOT MY FUNCTION
+
+function stringify(obj_from_json) {
+    if (typeof obj_from_json !== "object" || Array.isArray(obj_from_json)){
+        // not an object, stringify using native function
+        return JSON.stringify(obj_from_json);
+    }
+    // Implements recursive object serialization according to JSON spec
+    // but without quotes around the keys.
+    let props = Object
+        .keys(obj_from_json)
+        .map(key => `${key}:${stringify(obj_from_json[key])}`)
+        .join(",");
+    return `{${props}}`;
+}
+
 
 module.exports = mc8;

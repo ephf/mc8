@@ -299,6 +299,14 @@ and you will get:
 execute if score value athing matches ..4 at @r as @p run say whoop whoop!
 ```
 
+* ### data
+
+```javascript
+data.modify.[storage]('name', 'variable').[set | append].[value]('value');
+
+data.get.[storage]('name', 'variable', [optional: 'multiplier']);
+```
+
 * ### kill
 
 ```javascript
@@ -551,5 +559,16 @@ execute as @a[scores={hi=1..}] run say hi
 ```
 
 this will also add an interactive scoreboard that you can use with the `scoreboard.[name]()` function
+
+* ### economy __PRE RELEASE__
+
+```javascript
+economy.create();  // only works if used datapack.open(), initializes economy
+// PRE RELEASE - use 'money' scoreboard to change peoples' money
+
+/* NOT FULLY WORKING */ economy.sell('item id', 'price');  // when player uses /trigger sellhand, it will sell the item for the price
+```
+
+use `/trigger bal` to get your current balance
 
 [@ephf](https://www.youtube.com/channel/UCqfHbmI7lEK9vHTF4owbt9w) - 1.16
