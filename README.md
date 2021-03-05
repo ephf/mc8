@@ -250,10 +250,10 @@ scoreboard.[objective name].remove();
 ```javascript
 execute.[as | at]('selector')...
 
-execute.if.score('player name', 'objective name').is([> | = | < | >= | <= | !=], 'player 2 name', 'player 2 objective')...
+execute.if.score('player name', 'objective name').is(['>' | '=' | '<' | '>=' | '<=' | '!='], 'player 2 name', 'player 2 objective')...
 execute.if.score('player name', 'objective name').matches('..number..')...
 
-execute.store.result.score('player name', 'objective')...
+execute.store.[result | success].score('player name', 'objective')...
 
 execute...run({optional function})...
 ```
@@ -302,7 +302,8 @@ execute if score value athing matches ..4 at @r as @p run say whoop whoop!
 * ### data
 
 ```javascript
-data.modify.[storage]('name', 'variable').[set | append].[value]('value');
+data.modify.[storage]('name', 'variable').[set | append].value('value');
+data.modify.[storage]('name', 'variable').[set | append].from('type', 'name', 'variable');
 
 data.get.[storage]('name', 'variable', [optional: 'multiplier']);
 ```
@@ -560,13 +561,12 @@ execute as @a[scores={hi=1..}] run say hi
 
 this will also add an interactive scoreboard that you can use with the `scoreboard.[name]()` function
 
-* ### economy __PRE RELEASE__
+* ### economy
 
 ```javascript
 economy.create();  // only works if used datapack.open(), initializes economy
-// PRE RELEASE - use 'money' scoreboard to change peoples' money
 
-/* NOT FULLY WORKING */ economy.sell('item id', 'price');  // when player uses /trigger sellhand, it will sell the item for the price
+economy.sell('item id', 'price');  // when player uses /trigger sellhand, it will sell the item for the price
 ```
 
 use `/trigger bal` to get your current balance

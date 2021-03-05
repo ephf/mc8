@@ -2252,6 +2252,17 @@ var mc8 = {
 
 				}
 
+			},
+			success: {
+
+				score(name, objective) {
+
+					mc8.execute.output += `store success score ${name} ${objective} `;
+
+					return mc8.execute;
+
+				}
+
 			}
 
 		}
@@ -2525,7 +2536,7 @@ throw err;
 	data: {
 		get: {
 			storage(name, val, ex) {
-				mc8.mc8_writefile(`data get storage ${name} ${val}${ex ? ' ' + ex : ''}`, mc8.mc8_newfile());
+				mc8.mc8_writefile(`data get storage ${name} ${val}${ex ? ' ' + ex : ''}\n`, mc8.mc8_newfile());
 			}
 		},
 		modify: {
@@ -2538,11 +2549,17 @@ throw err;
 			set: {
 				value(val) {
 					mc8.mc8_writefile(`set value ${stringify(val)}\n`, mc8.mc8_newfile());
+				},
+				from(type, name, val) {
+					mc8.mc8_writefile(`set from ${type} ${name} ${val}\n`, mc8.mc8_newfile());
 				}
 			},
 			append: {
 				value(val) {
 					mc8.mc8_writefile(`append value ${stringify(val)}\n`, mc8.mc8_newfile());
+				},
+				from(type, name, val) {
+					mc8.mc8_writefile(`append from ${type} ${name} ${val}\n`, mc8.mc8_newfile());
 				}
 			}
 		}
@@ -2561,17 +2578,23 @@ throw err
 				mc8.datapack.setFunctionLoad('economy:load');
 
 				mc8.scoreboard.add('money', 'dummy');
+				mc8.scoreboard.add('economy', 'dummy');
 				mc8.data.modify.storage('eco-items', 'sell').set.value([]);
 
 				mc8.currentFile('economy:cmds');
 				mc8.datapack.setFunctionTick('economy:cmds');
 
+				scoreboard.money.add('@a', 0);
 				mc8.trigger('bal', () => {
 					mc8.tellraw('@s', [{"text":"Your Balance: $","color":"yellow"},{"score":{"name":"@s","objective":"money"}}]);
 				});
 				mc8.trigger('sellhand', () => {
-					//sell item
+					_function('economy:sellhand');
 				});
+
+				mc8.currentFile('economy:sellhand');
+
+				mc8.data.modify.storage('eco-items', 'hand').set.from('entity', '@s', 'SelectedItem.id');
 
 				mc8.cfn = lastFile;
 
@@ -2585,8 +2608,26 @@ throw err
 
 			data.modify.storage('eco-items', 'sell').append.value({id:`${id}`,price:price});
 
+			mc8.currentFile('economy:sellhand');
+
+			mc8.execute.store.success.score('is_hand', 'economy').run().data.modify.storage('eco-items', 'hand').set.from('storage', 'eco-items', `sell[${mc8.economy.atr.items}].id`);
+			mc8.execute.if.score('is_hand', 'economy').matches(0).run(() => {
+				mc8.execute.store.result.score('cost', 'economy').run().data.get.storage('eco-items', `sell[${mc8.economy.atr.items}].price`);
+				mc8.execute.store.result.score('stack', 'economy').run().clear('@s', id);
+				mc8.scoreboard.economy.operation('cost').multiply('stack', 'economy');
+				mc8.scoreboard.money.operation('@s').add('cost', 'economy');
+				mc8.tellraw('@s', [{"text":`Sold items for: $`,"color":"yellow"},{"score":{"name":"cost","objective":"economy"}}]);
+			});
+			mc8.data.modify.storage('eco-items', 'hand').set.from('entity', '@s', 'SelectedItem.id');
+
+
+			mc8.economy.atr.items++;
+
 			mc8.cfn = lastFile;
 
+		},
+		atr: {
+			items: 0
 		}
 	}
 }
